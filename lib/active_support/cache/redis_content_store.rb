@@ -19,13 +19,13 @@ module ActiveSupport
       
       #----------
       
-      def read_entry(key,options)
+      def read_entry(key,options={})
         super(key,options)
       end
       
       #----------
       
-      def write_entry(key,entry,options)
+      def write_entry(key,entry,options={})
         # expire this key from existing sets
         @data.keys(SET_PREFIX+"*").each do |obj|
           @data.srem(obj,key)
