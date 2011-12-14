@@ -10,6 +10,12 @@ module RedisContentStore
       nil
     end
     
+    def register_content(obj)
+      if defined? @COBJECTS
+        @COBJECTS << obj
+      end
+    end
+    
     private
     def fragment_for(name,options=nil, &block)
       if fragment = controller.read_fragment(name, options)
