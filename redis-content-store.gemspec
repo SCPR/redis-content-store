@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Eric Richardson"]
   s.date = "2011-10-13"
-  s.description = "TODO: longer description of your gem"
+  s.description = "Content-aware caching for Rails"
   s.email = "erichardson@kpcc.org"
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.10"
-  s.summary = "TODO: one-line summary of your gem"
+  s.summary = "content-aware caching for Rails"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3

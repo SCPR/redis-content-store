@@ -5,6 +5,7 @@ module ActiveSupport
     class RedisContentStore < RedisStore
       
       SET_PREFIX = "obj:"
+      FSET_PREFIX = "sobj:"
       
       #----------
       
@@ -26,18 +27,27 @@ module ActiveSupport
       #----------
       
       def write_entry(key,entry,options={})
+
         # expire this key from existing sets
-        @data.keys(SET_PREFIX+"*").each do |obj|
-          @data.srem(obj,key)
+        fkeys = @data.smembers(FSET_PREFIX+key)
+        if fkeys && !fkeys.empty?
+          fkeys.each do |fobj|
+            @data.srem(fobj,key)            
+          end
         end
         
         # now add it to any objects passed in
         if options && options[:objects]
+          keys = []
           options[:objects].each do |obj|
             okey = obj.respond_to?(:obj_key) ? obj.obj_key : obj.to_s
             Rails.logger.debug("adding #{key} to cache set for #{okey}")
             @data.sadd(SET_PREFIX+okey,key)
+            keys << SET_PREFIX+okey
           end
+          
+          @data.del(FSET_PREFIX+key)
+          @data.sadd(FSET_PREFIX+key,keys)
         end
         
         # write our cache
