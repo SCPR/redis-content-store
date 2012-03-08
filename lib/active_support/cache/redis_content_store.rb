@@ -11,7 +11,7 @@ module ActiveSupport
       
       def expire_obj(obj)
         key = obj.respond_to?(:obj_key) ? obj.obj_key : obj
-        Rails.logger.debug("expire_obj on ", key)
+        Rails.logger.debug("expire_obj on #{key}")
         objs = @data.smembers(SET_PREFIX+key)
         if objs && !objs.empty?
           @data.del(*objs)
