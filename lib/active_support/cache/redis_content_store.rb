@@ -1,4 +1,4 @@
-require 'redis-store'
+require 'redis-activesupport'
 
 module ActiveSupport
   module Cache
