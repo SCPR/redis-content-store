@@ -25,7 +25,7 @@ module RedisContentStore
         @COBJECTS = []
         fragment = capture(&block)
         Rails.logger.debug("RCS done block capture: #{@COBJECTS}")
-        controller.write_fragment(name,fragment,(options||{}).merge({:objects => @COBJECTS}))
+        controller.write_fragment(name,fragment||'',(options||{}).merge({:objects => @COBJECTS}))
         fragment
       end
     end
