@@ -46,12 +46,18 @@ module ActiveSupport
             keys << SET_PREFIX+okey
           end
           
-          @data.del(FSET_PREFIX+key)
-          @data.sadd(FSET_PREFIX+key,keys)
+          rewrite_set(key, keys)
         end
         
         # write our cache
         super(key,entry,options)
+      end
+      
+      #----------
+
+      def rewrite_set(key, keys)
+        @data.del(FSET_PREFIX+key)
+        @data.sadd(FSET_PREFIX+key,keys)
       end
       
       #----------

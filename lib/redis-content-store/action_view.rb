@@ -21,11 +21,15 @@ module RedisContentStore
       if fragment = controller.read_fragment(name, options)
         fragment
       else
-        Rails.logger.debug("RCS starting block capture")
         @COBJECTS = []
         fragment = capture(&block) || ''
-        Rails.logger.debug("RCS done block capture: #{@COBJECTS}")
-        controller.write_fragment(name,fragment,(options||{}).merge({:objects => @COBJECTS}))
+        
+        # If no content is registered, still write the fragment,
+        # even though it won't expire.
+        objects = @COBJECTS.empty? ? nil : @COBJECTS
+        options = objects ? (options || {}).merge({:objects => objects}) : options
+        
+        controller.write_fragment(name,fragment,options)
         fragment
       end
     end
