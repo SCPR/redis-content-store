@@ -1,9 +1,0 @@
-= content-cache
-
-Description goes here.
-
-== Copyright
-
-Copyright (c) 2011 Southern California Public Radio. See LICENSE.txt for
-further details.
-
