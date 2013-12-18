@@ -16,5 +16,5 @@ Gem::Specification.new do |s|
             ["LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"]
 
-  s.add_runtime_dependency("redis-activesupport", "~> 3.2.2")
+  s.add_runtime_dependency("redis-activesupport", "~> 4.0.0")
 end
